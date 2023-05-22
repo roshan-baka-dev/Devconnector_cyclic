@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -15,27 +15,39 @@ import Register from './component/auth/Register';
 import Alert from './component/layout/Alert';
 // redux
 import { Provider } from 'react-redux';
-// import { createStore, applyMiddleware } from 'redux';
 import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
+// import { createStore, applyMiddleware } from 'redux';
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 // const store = createStore(() => [], {}, applyMiddleware());
-const App = () => (
-  <Provider store={store}>
-    <Router>
-      <Fragment>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Landing />} />
-        </Routes>
-        <section>
-          <Alert />
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
+  return (
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
           <Routes>
-            <Route path='/register' element={<Register />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Landing />} />
           </Routes>
-        </section>
-      </Fragment>
-    </Router>
-  </Provider>
-);
+          <section className='container'>
+            <Alert />
+            <Routes>
+              <Route path='/register' element={<Register />} />
+              <Route path='/login' element={<Login />} />
+            </Routes>
+          </section>
+        </Fragment>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
