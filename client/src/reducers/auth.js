@@ -5,6 +5,8 @@ import {
   AUTH_ERROR,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  LOGOUT,
+  ACCOUNT_DELETED,
 } from '../actions/types';
 
 const intialState = {
@@ -19,6 +21,7 @@ export default function (state = intialState, action) {
 
   switch (type) {
     case USER_LOADED:
+      console.log('userLoaded');
       return {
         ...state,
         isAuthenticated: true,
@@ -35,9 +38,12 @@ export default function (state = intialState, action) {
         isAuthenticated: true,
         loading: false,
       };
+    case LOGOUT:
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:
+    case ACCOUNT_DELETED:
+      // console.log('entered logout');
       localStorage.removeItem('token');
       return {
         ...state,
