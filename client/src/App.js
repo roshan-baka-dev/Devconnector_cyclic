@@ -24,6 +24,11 @@ import CreateProfile from './component/profile_form/CreateProfile';
 import EditProfile from './component/profile_form/EditProfile';
 import AddExperience from './component/profile_form/AddExperience';
 import AddEducation from './component/profile_form/AddEducation';
+import Profiles from './component/profiles/Profiles';
+import Profile from './component/profile/Profile';
+import Posts from './component/posts/Posts';
+import Post from './component/post/Post';
+// console.log(typeof Profile);
 // import { createStore, applyMiddleware } from 'redux';
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -48,17 +53,19 @@ const App = () => {
             <Routes>
               <Route path='/register' element={<Register />} />
               <Route path='/login' element={<Login />} />
-              {/* this route is not private have to fix this */}
-              <Route
-                path='/dashboard'
-                element={<PrivateRoute path='/dashboard' />}
-              />
-              {/* this route is not private have to fix this */}
-              <Route path='/create-profile' element={<CreateProfile />} />
-              {/* this route is not private have to fix this */}
-              <Route path='/edit-profile' element={<EditProfile />} />
-              <Route path='/add-experience' element={<AddExperience />} />
-              <Route path='/add-education' element={<AddEducation />} />
+              <Route path='/profiles' element={<Profiles />} />
+              <Route path='/profile/:id' element={<Profile />} />
+
+              {/* private Routes */}
+              <Route element={<PrivateRoute />}>
+                <Route path='/dashboard' element={<Dashboard />} />
+                <Route path='/create-profile' element={<CreateProfile />} />
+                <Route path='/edit-profile' element={<EditProfile />} />
+                <Route path='/add-experience' element={<AddExperience />} />
+                <Route path='/add-education' element={<AddEducation />} />
+                <Route path='/posts' element={<Posts />} />
+                <Route path='/posts/:id' element={<Post />} />
+              </Route>
             </Routes>
           </section>
         </Fragment>

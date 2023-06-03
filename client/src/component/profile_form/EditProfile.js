@@ -12,7 +12,7 @@ const EditProfile = ({
   createProfile,
   getCurrentProfile,
 }) => {
-  //   console.log(typeof createProfile);
+  // console.log(typeof createProfile);
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -63,7 +63,7 @@ const EditProfile = ({
       youtube: loading || !profile.youtube ? '' : profile.youtube,
       instagram: loading || !profile.instagram ? '' : profile.instagram,
     });
-  }, [loading]);
+  }, [getCurrentProfile]);
 
   const history = useNavigate();
   const onChange = (e) =>
