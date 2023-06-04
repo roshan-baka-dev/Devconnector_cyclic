@@ -28,6 +28,7 @@ import Profiles from './component/profiles/Profiles';
 import Profile from './component/profile/Profile';
 import Posts from './component/posts/Posts';
 import Post from './component/post/Post';
+import NotFound from './component/layout/NotFound';
 // console.log(typeof Profile);
 // import { createStore, applyMiddleware } from 'redux';
 if (localStorage.token) {
@@ -66,6 +67,7 @@ const App = () => {
                 <Route path='/posts' element={<Posts />} />
                 <Route path='/posts/:id' element={<Post />} />
               </Route>
+              <Route path='*' element={<NotFound />} />
             </Routes>
           </section>
         </Fragment>
